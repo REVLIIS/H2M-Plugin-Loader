@@ -8,8 +8,8 @@ This is a plugin loader for H2M, designed for adding/testing new features to H2M
 * **Only Client Running the Plugin:** The plugin will not work because the server doesn't recognize the modifications.
 
 ## How to setup
-1. Go to the [Releases](https://github.com/REVLIIS/H2M-Plugin-Loader/releases) section in the sidebar and download the latest `.rar` file.
-2. Unzip the contents of the `.rar` into your H2M root folder (the same folder where your h2m-mod.exe is located).
+1. Go to the [Releases](https://github.com/REVLIIS/H2M-Plugin-Loader/releases) section in the sidebar and download the latest `.zip` file.
+2. Unzip the contents of the `.zip` into your H2M root folder (the same folder where your h2m-mod.exe is located).
 3. Add your DLLs to the plugins folder e.g. `\Call of Duty Modern Warfare Remastered\plugins\Silverr\wrist twists.dll`
 4. Run h2m-mod.exe (or your server's startup .bat file if you're a server hoster) and if you setup everything correctly, your console window should look something like this:
 ![image](https://github.com/user-attachments/assets/3b640755-9398-4d85-90a9-a59c4cff4d04)
