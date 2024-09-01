@@ -1,0 +1,131 @@
+﻿{
+  "version": 3,
+  "configurePresets": [
+    {
+      "name": "windows-base",
+      "hidden": true,
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/out/build/${presetName}",
+      "installDir": "${sourceDir}/out/install/${presetName}",
+      "cacheVariables": {
+        "CMAKE_C_COMPILER": "cl.exe",
+        "CMAKE_CXX_COMPILER": "cl.exe"
+      },
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Windows"
+      }
+    },
+    {
+      "name": "x64-debug",
+      "displayName": "x64 Debug",
+      "inherits": "windows-base",
+      "architecture": {
+        "value": "x64",
+        "strategy": "external"
+      },
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug"
+      }
+    },
+    {
+      "name": "x64-release",
+      "displayName": "x64 Release",
+      "inherits": "x64-debug",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release"
+      }
+    },
+    {
+      "name": "x86-debug",
+      "displayName": "x86 Debug",
+      "inherits": "windows-base",
+      "architecture": {
+        "value": "x86",
+        "strategy": "external"
+      },
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug"
+      }
+    },
+    {
+      "name": "x86-release",
+      "displayName": "x86 Release",
+      "inherits": "x86-debug",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release"
+      }
+    },
+    {
+      "name": "gcc-x64-debug",
+      "displayName": "GCC x64 Debug",
+      "generator": "MinGW Makefiles",
+      "binaryDir": "${sourceDir}/out/build/${presetName}",
+      "installDir": "${sourceDir}/out/install/${presetName}",
+      "architecture": {
+        "value": "x64",
+        "strategy": "external"
+      },
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_C_COMPILER": "C:/TDM-GCC-64/bin/gcc.exe",
+        "CMAKE_CXX_COMPILER": "C:/TDM-GCC-64/bin/g++.exe",
+        "CMAKE_MAKE_PROGRAM": "C:/TDM-GCC-64/bin/mingw32-make.exe",
+        "CMAKE_CXX_STANDARD": "17",
+        "CMAKE_CXX_STANDARD_REQUIRED": "ON"
+      }
+    },
+    {
+      "name": "gcc-x64-release",
+      "displayName": "GCC x64 Release",
+      "generator": "MinGW Makefiles",
+      "binaryDir": "${sourceDir}/out/build/${presetName}",
+      "installDir": "${sourceDir}/out/install/${presetName}",
+      "architecture": {
+        "value": "x64",
+        "strategy": "external"
+      },
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "CMAKE_C_COMPILER": "C:/TDM-GCC-64/bin/gcc.exe",
+        "CMAKE_CXX_COMPILER": "C:/TDM-GCC-64/bin/g++.exe",
+        "CMAKE_MAKE_PROGRAM": "C:/TDM-GCC-64/bin/mingw32-make.exe",
+        "CMAKE_CXX_STANDARD": "17",
+        "CMAKE_CXX_STANDARD_REQUIRED": "ON"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "x64-debug",
+      "configurePreset": "x64-debug",
+      "description": "Build using MSVC x64 Debug"
+    },
+    {
+      "name": "x64-release",
+      "configurePreset": "x64-release",
+      "description": "Build using MSVC x64 Release"
+    },
+    {
+      "name": "x86-debug",
+      "configurePreset": "x86-debug",
+      "description": "Build using MSVC x86 Debug"
+    },
+    {
+      "name": "x86-release",
+      "configurePreset": "x86-release",
+      "description": "Build using MSVC x86 Release"
+    },
+    {
+      "name": "gcc-x64-debug",
+      "configurePreset": "gcc-x64-debug",
+      "description": "Build using TDM-GCC x64 Debug"
+    },
+    {
+      "name": "gcc-x64-release",
+      "configurePreset": "gcc-x64-release",
+      "description": "Build using TDM-GCC x64 Release"
+    }
+  ]
+}
