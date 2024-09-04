@@ -1,4 +1,6 @@
 #include <thread>
+#include <chrono>
+
 #include <atomic>
 #include "HotReloader.hpp"
 #include "Logger.hpp"
@@ -42,6 +44,13 @@ namespace HotReloader {
         }
     }
 
+    void load_plugin(std::string relativePath)
+    {
+        std::this_thread::sleep_for(std::chrono::milliseconds(Config::HotReload.hotReloadDelayInMSEC));
+
+        PluginInjector::inject_dll(relativePath);
+    }
+
     void watch_plugin_folder() {
         std::wstring directory = pluginsPath.wstring();
 
@@ -65,7 +74,7 @@ namespace HotReloader {
         FILE_NOTIFY_INFORMATION* pNotify;
         std::wstring fileName;
         std::unordered_map<std::wstring, std::chrono::steady_clock::time_point> suppressedFiles;
-        const std::chrono::milliseconds suppressionWindow(Config::HotReload.eventSuppressionWindowInMSEC); // Suppression window to prevent multiple detections e.g. when adding a file getting 2 modified calls after
+        const std::chrono::milliseconds suppressionWindow(Config::HotReload.eventSuppressionWindowInMSEC + Config::HotReload.hotReloadDelayInMSEC); // Suppression window to prevent multiple detections e.g. when adding a file getting 2 modified calls after
 
         while (keepRunning) {
             if (ReadDirectoryChangesW(hDir, buffer, sizeof(buffer), TRUE,
@@ -88,7 +97,7 @@ namespace HotReloader {
                             switch (pNotify->Action) {
                             case FILE_ACTION_ADDED:
                                 Logger::log("HotReloader detected a new plugin " + relativePath, print_color::magenta);
-                                PluginInjector::inject_dll(relativePath);
+                                load_plugin(relativePath);
                                 break;
                             case FILE_ACTION_REMOVED:
                                 Logger::log("HotReloader detected plugin deletion " + relativePath, print_color::magenta);
@@ -97,7 +106,7 @@ namespace HotReloader {
                             case FILE_ACTION_MODIFIED:
                                 Logger::log("HotReloader detected a plugin modification " + relativePath, print_color::magenta);
                                 unload_plugin(relativePath);
-                                PluginInjector::inject_dll(relativePath);
+                                load_plugin(relativePath);
                                 break;
                             }
 

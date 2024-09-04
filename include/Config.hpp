@@ -8,6 +8,7 @@ namespace Config {
     struct HotReloadConfig {
         bool enabled = false;
         int eventSuppressionWindowInMSEC = 500;
+        int hotReloadDelayInMSEC = 0;
     };
 
     struct PluginScannerConfig {

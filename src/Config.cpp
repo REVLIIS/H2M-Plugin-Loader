@@ -35,6 +35,7 @@ namespace Config {
         std::unordered_map<std::string, std::function<void(const std::string&)>> hotReloadMap = {
             {"enabled", [](const std::string& value) { HotReload.enabled = (value == "true" || value == "1"); }},
             {"eventSuppressionWindowInMSEC", [](const std::string& value) { HotReload.eventSuppressionWindowInMSEC = std::stoi(value); }},
+            {"hotReloadDelayInMSEC", [](const std::string& value) { HotReload.hotReloadDelayInMSEC = std::stoi(value); }},
         };
 
         std::unordered_map<std::string, std::function<void(const std::string&)>> pluginScannerMap = {
