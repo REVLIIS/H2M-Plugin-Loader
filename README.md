@@ -5,13 +5,15 @@ This is a plugin loader for H2M, designed for adding/testing new features to H2M
 ## How plugins that hook/detour game functions work on servers:
 * **Both Client and Server Running the Plugin:** This is the preferred way, results in the most consitent behavior since both sides are synced.
 * **Only Server Running the Plugin:** The client can connect but may experience glitches, for example when using a plugin that removes map boundaries, the client will expierence jittering when going out of bounds due to conflicts between the client and server states.
-* **Only Client Running the Plugin:** The plugin will not work because the server doesn't recognize the modifications.
+* **Only Client Running the Plugin:** The plugin will not work (correctly) because the server doesn't recognize the modifications.
 
 ## How to setup
 1. Go to the [Releases](https://github.com/REVLIIS/H2M-Plugin-Loader/releases) section in the sidebar and download the latest `.zip` file. Or click [here](https://github.com/REVLIIS/H2M-Plugin-Loader/releases/download/v1.0.0/H2MPluginLoader.zip) for a direct download.
-2. Unzip the contents of the `.zip` into your H2M root folder (the same folder where your h2m-mod.exe is located).
-3. Add your DLLs to the plugins folder e.g. `\Call of Duty Modern Warfare Remastered\plugins\Silverr\wrist twists.dll`
-4. Run h2m-mod.exe (or your server's startup .bat file if you're a server hoster) and if you setup everything correctly, your console window should look something like this:
+2. Unzip the contents of the `.zip` into your H2M root folder (where the h2m-mod.exe is) it should look similar to this:
+![image](https://github.com/user-attachments/assets/63313cc4-6b6b-474d-9f45-ed73aa9de526)
+3. Add your DLLs to the plugins folder.
+![image](https://github.com/user-attachments/assets/82e6bd07-d289-4eda-b3da-c0e7c0c317ae)
+5. Run h2m-mod.exe (or your server's startup .bat file if you're a server hoster) and if you setup everything correctly, your console window should look something like this:
 ![image](https://github.com/user-attachments/assets/3b640755-9398-4d85-90a9-a59c4cff4d04)
 
 ## For mod developers:
@@ -31,7 +33,7 @@ Compile with [TDM-GCC](https://jmeubank.github.io/tdm-gcc/).
 
 ### Build Instructions
 1. Clone repo
-2. Make sure TDM-GCC is installed and added to your PATH variables.
+2. Make sure cmake and TDM-GCC are installed and added to your PATH variables.
 3. Run cmds in project root:
 
 ```bash
